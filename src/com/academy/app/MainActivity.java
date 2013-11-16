@@ -23,6 +23,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        //********************************
+        //If you are testing, your activity, uncomment the next line 
+        //********************************
         setContentView(R.layout.activity_main);//initializes the screen to our xml file found in res/layout/
         
         activityList = (ListView)findViewById(R.id.activitylist);//Getting and storing the reference to the view from the xml
