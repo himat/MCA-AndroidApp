@@ -32,8 +32,11 @@ public final class R {
         public static final int activity_main=0x7f030001;
     }
     public static final class menu {
-        public static final int example=0x7f070000;
-        public static final int main=0x7f070001;
+        public static final int blob=0x7f070000;
+        public static final int cake=0x7f070001;
+        public static final int example=0x7f070002;
+        public static final int main=0x7f070003;
+        public static final int rike=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;

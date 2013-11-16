@@ -2,6 +2,7 @@ package com.academy.app;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -24,10 +25,22 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        
+        
+        
+        
+        
+        
         //********************************
-        //If you are testing, your activity, uncomment the next line 
-        //
+        //If you are testing, your activity, uncomment the next 2 lines
+        //Intent myIntent = new Intent(this, <classname>.class);//replace <classname> with the name of your class
+		//startActivity(myIntent);
         //********************************
+        
+        
+        
+        
+        
         setContentView(R.layout.activity_main);//initializes the screen to our xml file found in res/layout/
         
         activityList = (ListView)findViewById(R.id.activitylist);//Getting and storing the reference to the view from the xml
