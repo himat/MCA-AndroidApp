@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
         
         //********************************
         //If you are testing, your activity, uncomment the next line 
+        //
         //********************************
         setContentView(R.layout.activity_main);//initializes the screen to our xml file found in res/layout/
         
