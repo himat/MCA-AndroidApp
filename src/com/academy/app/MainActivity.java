@@ -1,6 +1,12 @@
 package com.academy.app;
 
+import com.academy.accounts.AccountHolder;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.AccountPicker;
+
 import android.os.Bundle;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -11,10 +17,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
 public class MainActivity extends Activity {
 	
 	private ListView activityList; //A reference to the ListView Widget in our main xml file that will display the info
 	private String[] activities; //to store all the different activity names to display in our list view
+	
+	static final int REQUEST_GET_ACCOUNT = 3;
+	static final int REQUEST_RECOVER_PLAY_SERVICES = 4;
 	
 	//We can't directy connect the string array to the ListView
 	//So this adapter will handle the communication
@@ -28,11 +38,8 @@ public class MainActivity extends Activity {
         
         
         
-        
-        
-        
         //********************************
-        //If you are testing, your activity, uncomment the next 2 lines
+        //If you are testing your activity, uncomment the next 2 lines
         //Intent myIntent = new Intent(this, <classname>.class);//replace <classname> with the name of your class
 		//startActivity(myIntent);
         //********************************
@@ -79,6 +86,64 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    private boolean checkUserAccount(){
+    	String accountName = AccountHolder.getAccountName(this);
+    	if(accountName == null)
+    	{
+    		showAccountPicker();
+    		return false;
+    	}
+    	
+    	Account account = AccountHolder.getGoogleAccountByName(this, accountName);
+    	if(account == null)
+    	{
+    		AccountHolder.removeAccount(this);
+    		showAccountPicker();
+    		return false;
+    	}
+    	
+    	return true;
+    	
+    }
+    private void showAccountPicker(){
+    	Intent getAccountIntent = AccountPicker.newChooseAccountIntent(null, null, 
+    			new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE}, true, null, null, null, null);
+    	startActivityForResult(getAccountIntent, REQUEST_GET_ACCOUNT); 
+    			
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	switch(requestCode){
+    	case REQUEST_RECOVER_PLAY_SERVICES:
+    		if(resultCode == RESULT_CANCELED){
+    			Toast.makeText(this, "Google Play Services must be installed or updated", Toast.LENGTH_LONG).show();
+    			finish();
+    		}
+    		return;
+    		
+    	case REQUEST_GET_ACCOUNT:
+    		if(resultCode == RESULT_OK){
+    			String actName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+    			AccountHolder.setAccountName(this, actName);
+    		}
+    		else if(resultCode == RESULT_CANCELED){
+    			Toast.makeText(this, "A Google account is required for this app", Toast.LENGTH_LONG).show();
+    			finish();
+    		}
+    		return;
+    		
+    	}
+    	super.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    @Override
+    protected void onResume(){
+    	super.onResume();
+    	if( checkUserAccount() )
+    		Log.v("account name", AccountHolder.getAccountName(this));
     }
     
 }
