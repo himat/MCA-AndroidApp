@@ -1,5 +1,14 @@
 package com.academy.clubs;
 
-public class ClubActivity {
+import android.app.Activity;
+import android.os.Bundle;
 
+public class ClubActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+	}
+	
 }
