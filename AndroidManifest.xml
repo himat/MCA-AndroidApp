@@ -28,7 +28,20 @@
             android:name="com.academy.app.ExampleActivity"
             android:label="@string/title_activity_example" >
         </activity>
+        <activity
+            android:name="com.academy.clubs.ClubActivity"
+            android:label="clubs" >
+        </activity>
        
+        <activity
+            android:name="com.academy.clubs.FeedInfo"
+            android:theme="@android:style/Theme.Dialog" >
+            <intent-filter>
+                <action android:name="com.academy.clubs.FEEDINFO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

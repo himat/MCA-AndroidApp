@@ -1,6 +1,7 @@
 package com.academy.app;
 
 import com.academy.accounts.AccountHolder;
+import com.academy.clubs.ClubActivity;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
@@ -40,8 +41,8 @@ public class MainActivity extends Activity {
         
         //********************************
         //If you are testing your activity, uncomment the next 2 lines
-        //Intent myIntent = new Intent(this, <classname>.class);//replace <classname> with the name of your class
-		//startActivity(myIntent);
+        Intent myIntent = new Intent(this, ClubActivity.class);//replace <classname> with the name of your class
+		startActivity(myIntent);
         //********************************
         
         
