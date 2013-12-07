@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
@@ -30,9 +30,8 @@
         </activity>
         <activity
             android:name="com.academy.clubs.ClubActivity"
-            android:label="clubs" >
+            android:label="@string/club_manager" >
         </activity>
-       
         <activity
             android:name="com.academy.clubs.FeedInfo"
             android:theme="@android:style/Theme.Dialog" >
@@ -41,6 +40,14 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.academy.clubs.JoinClubActivity"
+            android:label="@string/title_activity_join_club" >
+        </activity>
+        <activity
+            android:name="com.academy.clubs.ClubListActivity"
+            android:label="@string/title_activity_club_list" >
         </activity>
     </application>
 
