@@ -2,6 +2,7 @@ package com.academy.clubs;
 
 public class Club {
 	String name;
+	String desc;
 	//TODO arraylist of users?
 	
 	public Club(String name)	{
@@ -20,6 +21,14 @@ public class Club {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

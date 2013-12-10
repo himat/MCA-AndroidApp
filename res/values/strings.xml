@@ -10,5 +10,6 @@
     <string name="join_club">Join a club</string>
     <string name="club_list">View Clubs</string>
     <string name="title_activity_club_list">ClubListActivity</string>
+    <string name="title_activity_club_view">ClubViewActivity</string>
 
 </resources>

@@ -49,6 +49,10 @@
             android:name="com.academy.clubs.ClubListActivity"
             android:label="@string/title_activity_club_list" >
         </activity>
+        <activity
+            android:name="com.academy.clubs.ClubViewActivity"
+            android:label="@string/title_activity_club_view" >
+        </activity>
     </application>
 
 </manifest>

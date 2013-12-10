@@ -26,7 +26,9 @@ public class ClubListActivity extends ListActivity {
 		clubs = new ArrayList<Club>();
 		//**********TEST CODE
 		clubs.add(new Club("Computer Science Club"));
+		clubs.get(0).setDesc("A wonderful club all about computer science. Please join ^_^");
 		clubs.add(new Club("Math League"));
+		clubs.get(1).setDesc("Want to become the best mathematician in the world?  Join the Math League!!!!");
 		//**********
 		//This is a list, so simple list (change later to accomodate more info... like images):
 		setListAdapter(new ArrayAdapter<Club>(ClubListActivity.this, android.R.layout.simple_list_item_1, clubs));
@@ -42,7 +44,15 @@ public class ClubListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		//TODO open up club profile page
+
+		//pass the club info
+		Bundle b  = new Bundle();
+		b.putString("title", clubs.get(position).getName());
+		b.putString("desc", clubs.get(position).getDesc());
+		//TODO pass member list and whatever other items need to be passed
+		Intent i = new Intent(ClubListActivity.this, ClubViewActivity.class);
+		i.putExtras(b);
+		startActivity(i);
 	}
 
 	@Override
