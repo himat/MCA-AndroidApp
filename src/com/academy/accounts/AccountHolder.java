@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 
 public class AccountHolder {
 	private static String accountName = null;
+	private static String token = null;
+	static Context context;
 	
 	private static final String KEY_ACCOUNT_NAME = "account_name";
 	
@@ -45,6 +48,9 @@ public class AccountHolder {
 		editor.apply();
 		
 		accountName = name;
+		context = c;
+		
+		//getToken();
 	}
 	
 	public static void removeAccount(Context c){
@@ -53,6 +59,17 @@ public class AccountHolder {
 		editor.apply();
 		
 		accountName = null;
+	}
+	
+	public static void getToken(){
+		Log.v("context status", ""+context);
+		try{
+			Log.v("started gettoken", "started getTok " + accountName);
+					token = GoogleAuthUtil.getToken(context, accountName, "oauth2:https://www.googleapis.com/auth/plus.me");
+					Log.v("token", token);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	
