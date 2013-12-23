@@ -73,10 +73,13 @@ public class MainActivity extends Activity {
         getToken.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-            	accountEmail = AccountHolder.getAccountName(MainActivity.this);
+            	accountEmail = AccountHolder.getAccountEmail(MainActivity.this);
+            	String accountName = AccountHolder.getAccountName(MainActivity.this);
             	Log.v("clicked found email", ""+accountEmail);
-                getTask(MainActivity.this, accountEmail, SCOPE,
-                        REQUEST_CODE_RECOVER_FROM_AUTH_ERROR).execute();
+            	Log.v("found name", accountName);
+            	show("Hi " + accountName);
+                //getTask(MainActivity.this, accountEmail, SCOPE,
+                  //      REQUEST_CODE_RECOVER_FROM_AUTH_ERROR).execute();
             }
         });
         
@@ -109,15 +112,15 @@ public class MainActivity extends Activity {
     }
     
     private boolean checkUserAccount(){
-    	String accountName = AccountHolder.getAccountName(this);
-    	Log.v("account stored name", ""+accountName);
-    	if(accountName == null)
+    	String accountEmail = AccountHolder.getAccountEmail(this);
+    	Log.v("account stored name", ""+accountEmail);
+    	if(accountEmail == null)
     	{
     		showAccountPicker();
     		return false;
     	}
     	
-    	Account account = AccountHolder.getGoogleAccountByName(this, accountName);
+    	Account account = AccountHolder.getGoogleAccountByEmail(this, accountEmail);
     	if(account == null)
     	{
     		AccountHolder.removeAccount(this);
@@ -152,7 +155,7 @@ public class MainActivity extends Activity {
     			accountEmail = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
     			getTask(MainActivity.this, accountEmail, SCOPE,
                         REQUEST_CODE_RECOVER_FROM_AUTH_ERROR).execute();
-    			AccountHolder.setAccountName(this, accountEmail);
+    			AccountHolder.setAccountEmail(this, accountEmail);
     		}
     		else if(resultCode == RESULT_CANCELED){
     			Toast.makeText(this, "A Google account is required for this app", Toast.LENGTH_LONG).show();
@@ -168,7 +171,7 @@ public class MainActivity extends Activity {
     protected void onResume(){
     	super.onResume();
     	if( checkUserAccount() )
-    		Log.v("account name", AccountHolder.getAccountName(this));
+    		Log.v("account name", AccountHolder.getAccountEmail(this));
     }
     
     private AbstractGetNameTask getTask(

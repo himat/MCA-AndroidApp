@@ -12,20 +12,22 @@ import android.util.Log;
 
 
 public class AccountHolder {
+	private static String accountEmail = null;
 	private static String accountName = null;
 	private static String token = null;
 	static Context context;
 	
+	private static final String KEY_ACCOUNT_EMAIL = "account_email";
 	private static final String KEY_ACCOUNT_NAME = "account_name";
 	
-	public static Account getGoogleAccountByName(Context c, String name){
-		if(name != null)
+	public static Account getGoogleAccountByEmail(Context c, String email){
+		if(email != null)
 		{
 			AccountManager manager = AccountManager.get(c);
 			Account[] accounts = manager.getAccountsByType(GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE);
 			for(Account account:accounts)
 			{
-				if(account.name.equals(name))
+				if(account.name.equals(email))
 					return account;
 			}
 			
@@ -34,6 +36,23 @@ public class AccountHolder {
 			
 	}
 
+	public static String getAccountEmail(Context c){
+		if(accountEmail != null)
+			return accountEmail;
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+		return prefs.getString(KEY_ACCOUNT_EMAIL, null);
+		
+	}
+	
+	public static void setAccountEmail(Context c, String email){
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(c).edit();
+		editor.putString(KEY_ACCOUNT_EMAIL, email);
+		editor.apply();
+		
+		accountEmail = email;
+		context = c;
+	}
+	
 	public static String getAccountName(Context c){
 		if(accountName != null)
 			return accountName;
@@ -48,24 +67,21 @@ public class AccountHolder {
 		editor.apply();
 		
 		accountName = name;
-		context = c;
-		
-		//getToken();
 	}
 	
 	public static void removeAccount(Context c){
 		Editor editor = PreferenceManager.getDefaultSharedPreferences(c).edit();
-		editor.remove(KEY_ACCOUNT_NAME);
+		editor.remove(KEY_ACCOUNT_EMAIL);
 		editor.apply();
 		
-		accountName = null;
+		accountEmail = null;
 	}
 	
 	public static void getToken(){
 		Log.v("context status", ""+context);
 		try{
-			Log.v("started gettoken", "started getTok " + accountName);
-					token = GoogleAuthUtil.getToken(context, accountName, "oauth2:https://www.googleapis.com/auth/plus.me");
+			Log.v("started gettoken", "started getTok " + accountEmail);
+					token = GoogleAuthUtil.getToken(context, accountEmail, "oauth2:https://www.googleapis.com/auth/plus.me");
 					Log.v("token", token);
 		} catch(Exception e){
 			e.printStackTrace();

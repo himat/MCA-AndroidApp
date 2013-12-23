@@ -98,6 +98,7 @@ public abstract class AbstractGetNameTask extends AsyncTask<Void, Void, Void>{
           InputStream is = con.getInputStream();
           String name = getFirstName(readResponse(is));
           activity.show("Hello " + name + "!");
+          AccountHolder.setAccountName(activity, name);
           //Toast.makeText(activity, "HI " + name + "!", Toast.LENGTH_LONG).show();
           is.close();
           return;
