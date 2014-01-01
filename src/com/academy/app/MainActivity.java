@@ -1,5 +1,7 @@
 package com.academy.app;
 
+import com.academy.lunchmanager.LunchActivity;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,8 +35,8 @@ public class MainActivity extends Activity {
         
         //********************************
         //If you are testing, your activity, uncomment the next 2 lines
-        //Intent myIntent = new Intent(this, <classname>.class);//replace <classname> with the name of your class
-		//startActivity(myIntent);
+        Intent myIntent = new Intent(this, LunchActivity.class);//replace <classname> with the name of your class
+		startActivity(myIntent);
         //********************************
         
         

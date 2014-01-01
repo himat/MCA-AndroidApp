@@ -26,7 +26,10 @@
             android:name="com.academy.app.ExampleActivity"
             android:label="@string/title_activity_example" >
         </activity>
-       
+        <activity
+            android:name="com.academy.lunchmanager.LunchActivity"
+            android:label="@string/title_activity_lunch" >
+        </activity>
     </application>
 
 </manifest>
